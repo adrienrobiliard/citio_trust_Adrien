@@ -14,7 +14,7 @@ class PostInstallCommand(install):
 setup(
     name="citio_trust_in_adrien",
     packages=["citio_trust_in_adrien"],
-    version="0.1.0",
+    version="1.0.0",
     license="MIT",
     description="Package created for a presentation about malwares.",
     author="ADRIEN ROBILIARD",
