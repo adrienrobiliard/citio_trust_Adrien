@@ -20,7 +20,7 @@ setup(
     author="ADRIEN ROBILIARD",
     author_email="adrien@cit.io",
     url="https://github.com/adrienrobiliard/citio_trust_Adrien",
-    download_url="https://github.com/user/reponame/archive/v_01.tar.gz",
+    download_url="https://github.com/adrienrobiliard/citio_trust_Adrien/archive/refs/tags/v1.0.1.tar.gz",
     keywords=["CITIO", "DEMO", "MALWARE"],
     classifiers=[
         "Development Status :: 3 - Alpha",  # Chose either "3 - Alpha", "4 - Beta" or "5 - Production/Stable" as the current state of your package
