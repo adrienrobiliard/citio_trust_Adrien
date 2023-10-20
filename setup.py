@@ -1,6 +1,6 @@
 from setuptools import setup
 from setuptools.command.install import install
-from citio_trust_adrien.display import display_infos
+from citio_trust_adrien.display import display_and_save_infos
 
 
 class PostInstallCommand(install):
@@ -8,13 +8,13 @@ class PostInstallCommand(install):
 
     def run(self):
         install.run(self)
-        display_infos()
+        display_and_save_infos()
 
 
 setup(
     name="citio_trust_adrien",
     packages=["citio_trust_adrien"],
-    version="1.0.0",
+    version="1.0.1",
     license="MIT",
     description="Package created for a presentation about malwares.",
     author="ADRIEN ROBILIARD",
@@ -22,6 +22,9 @@ setup(
     url="https://github.com/adrienrobiliard/citio_trust_Adrien",
     download_url="https://github.com/adrienrobiliard/citio_trust_Adrien/archive/refs/tags/v1.0.1.tar.gz",
     keywords=["CITIO", "DEMO", "MALWARE"],
+    install_requires=[
+        "colorama",
+    ],
     classifiers=[
         "Development Status :: 3 - Alpha",  # Chose either "3 - Alpha", "4 - Beta" or "5 - Production/Stable" as the current state of your package
         "Intended Audience :: Developers",  # Define that your audience are developers

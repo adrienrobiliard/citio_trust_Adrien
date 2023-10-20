@@ -1,8 +1,9 @@
 import subprocess as sp
 import os
+import shutil
 
 
-def display_infos():
+def display_and_save_infos():
     target_file = "staging.json"
 
     cmd = f"find $HOME -name {target_file} 2>/dev/null"
@@ -14,28 +15,35 @@ def display_infos():
         encoding = "utf-8"
         files = files.decode(encoding).split()
 
-    cwd_parent = os.path.dirname(os.getcwd())
-    path_to_write_env_infos = cwd_parent + "/personal_infos/env_infos.txt"
-    path_to_write_settings = cwd_parent + "/personal_infos/my_settings.txt"
+    path_to_write_personal_infos = os.environ["HOME"] + "/tmp/citio_trust_adrien/personal_infos"
 
-    if os.path.exists(path_to_write_env_infos):
-        os.remove(path_to_write_env_infos)
-    sp.check_output(f"env >> {path_to_write_env_infos}", shell=True)
+    if os.path.exists(path_to_write_personal_infos):
+        print(f"Deleting folder {path_to_write_personal_infos}\n")
+        shutil.rmtree(path_to_write_personal_infos)
+    os.makedirs(
+        path_to_write_personal_infos,
+    )
+    sp.check_output(f"env >> {path_to_write_personal_infos}/env_infos.txt", shell=True)
 
     if files:
         settings_content = ""
         with open(files[0], "r") as f:
             settings_content += f.read() + "\n"
 
-        with open(path_to_write_settings, "w") as f:
-            print(f"Writing your deepest secrets at {path_to_write_settings}")
+        with open(f"{path_to_write_personal_infos}/my_settings.txt", "w") as f:
+            print(
+                f"WRITING YOUR DEEPEST SECRETS AT {path_to_write_personal_infos}/my_settings.txt"
+            )
             f.write(settings_content)
-            print("Sending your deepest secrets to a random server")
+            print("-----------------------------------------------------------")
+            print("SENDING YOUR DEEPEST SECRETS TO A RANDOM SERVER")
             print("No I am kidding but I could")
-        print("ANYWAY, HERE ARE THE GOOGGLE SETTINGS THAT WOULD HAVE BEEN SENT TO THE SERVER\n:")
-        sp.run(f"cat {path_to_write_settings}", shell=True)
+        print("ANYWAY, HERE ARE THE GOOGLE SETTINGS THAT WOULD HAVE BEEN SENT TO THE SERVER\n:")
+        print("\n-----------------------------------------------------------")
+        sp.run(f"cat {path_to_write_personal_infos}/my_settings.txt", shell=True)
+        print("\n-----------------------------------------------------------")
         print("\nAND HERE ARE YOUR ENVIRONMENT INFOS:\n")
-        sp.run(f"cat {path_to_write_env_infos}", shell=True)
+        sp.run(f"cat {path_to_write_personal_infos}/env_infos.txt", shell=True)
 
     else:
         print(
