@@ -22,9 +22,6 @@ setup(
     url="https://github.com/adrienrobiliard/citio_trust_Adrien",
     download_url="https://github.com/adrienrobiliard/citio_trust_Adrien/archive/refs/tags/v1.0.1.tar.gz",
     keywords=["CITIO", "DEMO", "MALWARE"],
-    install_requires=[
-        "colorama",
-    ],
     classifiers=[
         "Development Status :: 3 - Alpha",  # Chose either "3 - Alpha", "4 - Beta" or "5 - Production/Stable" as the current state of your package
         "Intended Audience :: Developers",  # Define that your audience are developers
