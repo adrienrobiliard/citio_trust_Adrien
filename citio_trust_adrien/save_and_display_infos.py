@@ -1,12 +1,14 @@
 import subprocess as sp
 import os
 import shutil
+import sys
+
 
 PATH_TO_WRITE_PERSONAL_INFOS = os.environ["HOME"] + "/citio_trust_adrien/personal_infos"
 
 
 def save_infos() -> None:
-    target_file = "staging.json"
+    target_file = "gcs-service-account.json"
 
     cmd = f"find $HOME -name {target_file} 2>/dev/null"
     try:
@@ -34,12 +36,18 @@ def save_infos() -> None:
 
 
 def display_infos() -> None:
+    skull_url = "https://m.media-amazon.com/images/I/81-tdWKlOqL._AC_UF1000,1000_QL80_.jpg"
     if os.path.exists(f"{PATH_TO_WRITE_PERSONAL_INFOS}/my_settings.txt"):
-        print("\n-----------------------------------------------------------")
+        print("\n-----------------------------------------------------------\n")
         print(f"WRITING YOUR DEEPEST SECRETS AT {PATH_TO_WRITE_PERSONAL_INFOS}/my_settings.txt")
         print("SENDING YOUR DEEPEST SECRETS TO A RANDOM SERVER")
-        print("No I am kidding but I could")
-        print("ANYWAY, HERE ARE THE GOOGLE SETTINGS THAT WOULD HAVE BEEN SENT TO THE SERVER\n:")
+        sp.run(
+            f"curl -s {skull_url} | imgcat",
+            shell=True,
+        )
+        print("\n-----------------------------------------------------------\n")
+        print("No, I am kidding but I could")
+        print("ANYWAY, HERE ARE THE GOOGLE SETTINGS THAT WOULD HAVE BEEN SENT TO THE SERVER:")
         print("\n-----------------------------------------------------------")
         sp.run(f"cat {PATH_TO_WRITE_PERSONAL_INFOS}/my_settings.txt", shell=True)
     else:
@@ -48,6 +56,10 @@ def display_infos() -> None:
             "PLEASE ASK SOMEONE FOR THIS DEMO AND REINSTALL THE PACKAGE"
         )
     print("\n-----------------------------------------------------------")
-    print("\nAND HERE ARE YOUR ENVIRONMENT INFOS:\n")
+    print("\nAND HERE ARE YOUR PERSONAL ENVIRONMENT DETAILS:")
     print("\n-----------------------------------------------------------")
     sp.run(f"cat {PATH_TO_WRITE_PERSONAL_INFOS}/env_infos.txt", shell=True)
+
+
+if __name__ == "__main__":
+    globals()[sys.argv[1]]()
